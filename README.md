@@ -5,6 +5,11 @@ A ComputerCraft system that allows you to set up cheap, efficient, scalable mini
 
 Turtles communicate with a node.js server to coordinate mining at a minimal resource cost.
 
+Setup Floppy Disk with
+```lua
+pastebin run CUU1aBjW
+```
+
 Read about setup and usage [here](http://www.computercraft.info/forums2/index.php?/topic/25138-nodequarry-a-cheap-scalable-web-based-turtle-quarry/).
 
 ## Todo

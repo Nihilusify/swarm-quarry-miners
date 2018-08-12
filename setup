@@ -41,12 +41,24 @@ print("Deploy this turtle as miner? [Y/N]")
 local _,key = os.pullEvent("char")
 if key == "y" then
 	print("Copying files...")
-	fs.copy("disk/relgo","relgo")
-	fs.copy("disk/config","config")
-	fs.copy("disk/miner","miner")
-	fs.copy("disk/json","json")
-	fs.copy("disk/swarm","swarm")
-	fs.copy("disk/.swarmconfig",".swarmconfig")
+	if not fs.exist("relgo") then
+		fs.copy("disk/relgo","relgo")
+	end
+	if not fs.exist("config") then
+		fs.copy("disk/config","config")
+	end
+	if not fs.exist("miner") then
+		fs.copy("disk/miner","miner")
+	end
+	if not fs.exist("json") then
+		fs.copy("disk/json","json")
+	end
+	if not fs.exist("swarm") then
+		fs.copy("disk/swarm","swarm")
+	end
+	if not fs.exist(".swarmconfig") then
+		fs.copy("disk/.swarmconfig",".swarmconfig")
+	end
 	local f = fs.open("startup","w")
 	f.write("shell.run('swarm')")
 	f.close()
