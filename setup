@@ -40,26 +40,29 @@ assert(turtle, "This disk is to deploy turtle swarm miners!")
 print("Deploy this turtle as miner? [Y/N]")
 local _,key = os.pullEvent("char")
 if key == "y" then
-	print("Copying files...")
-	if not fs.exist("relgo") then
-		fs.copy("disk/relgo","relgo")
-	end
-	if not fs.exist("config") then
-		fs.copy("disk/config","config")
-	end
-	if not fs.exist("miner") then
-		fs.copy("disk/miner","miner")
-	end
-	if not fs.exist("json") then
-		fs.copy("disk/json","json")
-	end
-	if not fs.exist("swarm") then
-		fs.copy("disk/swarm","swarm")
-	end
-	if not fs.exist(".swarmconfig") then
-		fs.copy("disk/.swarmconfig",".swarmconfig")
-	end
-	local f = fs.open("startup","w")
+
+    programs = {
+        "relgo",
+        "config",
+        "miner",
+        "json",
+        "swarm",
+        ".swarmconfig"
+    }
+
+    print("Downloading...")
+
+    for i = 1, #programs, 1 do
+        if fs.exists(programs[i]) then
+            print(programs[i].." exists")
+        else
+            print("Downloading "..programs[i])
+            fs.copy("disk/"..programs[i],programs[i])
+        end
+    end
+
+    print("writing startup")
+    local f = fs.open("startup","w")
 	f.write("shell.run('swarm')")
 	f.close()
 	print("Installation complete; starting miner")
