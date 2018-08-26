@@ -54,13 +54,13 @@ if key == "y" then
 
     for i = 1, #programs, 1 do
         if fs.exists(programs[i]) then
-            print(programs[i].." exists")
-        else
-            print("Downloading "..programs[i])
-            fs.copy("disk/"..programs[i],programs[i])
+            print("deleting "..programs[i])
+            fs.delete(programs[i])
         end
+        print("Downloading "..programs[i])
+        fs.copy("disk/"..programs[i],programs[i])
     end
-
+    
     print("writing startup")
     local f = fs.open("startup","w")
 	f.write("shell.run('swarm')")
